@@ -149,8 +149,8 @@ export class Yorb {
         // }
 
         if (MODE === 'YORB') {
-            this.show = new SpringShow2021(this.scene, this.camera, this.controls, this.mouse);
-            this.show.setup();
+            // this.show = new SpringShow2021(this.scene, this.camera, this.controls, this.mouse);
+            // this.show.setup();
             //this.projectionScreens.createYorbProjectionScreens()
 	        this.projectionScreens = new ProjectionScreens(this.scene, this.camera, this.mouse);
             this.itpModel = new ITPModel(this.scene);
@@ -545,7 +545,7 @@ export class Yorb {
 
         if (!this.controls.paused) {
             this.frameCount++;
-            this.show.update();
+            if (this.show) this.show.update();
 
             // things to update 50 times per seconds:
             this.controls.update();
