@@ -36,7 +36,7 @@ let INSTANCE_PATH = false;
 // INSTANCE_PATH = '/socket.io';
 
 // For running against ITP server
-WEB_SOCKET_SERVER = 'https://yorblet1.itp.io';
+WEB_SOCKET_SERVER = 'https://yorb.itp.io';
 INSTANCE_PATH = '/socket.io';
 
 //==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//
