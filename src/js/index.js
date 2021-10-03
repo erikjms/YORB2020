@@ -36,7 +36,7 @@ let INSTANCE_PATH = false;
 // INSTANCE_PATH = '/socket.io';
 
 // For running against ITP server
-WEB_SOCKET_SERVER = 'https://yorblet1.itp.io';
+WEB_SOCKET_SERVER = 'https://yorb.itp.io';
 INSTANCE_PATH = '/socket.io';
 
 //==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//
@@ -159,6 +159,7 @@ async function init() {
         sendCameraStreams();
         setupControls();
         turnGravityOn();
+        hitPlay();
         initialized = true;
         isInTutorial = false;
     }
@@ -310,6 +311,13 @@ function updateProjects(_projects) {
         yorbScene.updateProjects(projects);
         yorbScene.createHtmlProjectList(projects);
     }
+}
+
+function hitPlay() {
+  // check and see if we've visited #buds ...
+  // if(window.location.hash == '#buds') {
+    yorbScene.budsGallery.addDisplays()
+  // }
 }
 
 //==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//

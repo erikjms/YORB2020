@@ -19,6 +19,7 @@ import { Controls } from './controls.js';
 import { Yorblet } from './yorblet.js';
 import { PhotoGallery } from './photoGallery';
 import { DaysGallery } from './daysGallery';
+import { BudsGallery } from './budsGallery';
 import { Yorbie } from './yorbie';
 import { Tutorial } from './tutorial';
 let tutorialLayer = 2;
@@ -71,7 +72,9 @@ export class Yorb {
         // STATS for debugging:
         this.stats = new Stats();
         document.body.appendChild(this.stats.dom);
-        this.stats.dom.style = 'visibility: hidden;';
+        this.stats.dom.style = 'visibility: hidden'
+        this.stats.dom.id = 'stats'
+
 
         //THREE Camera
         this.cameraHeight = 1.75;
@@ -146,14 +149,16 @@ export class Yorb {
         // }
 
         if (MODE === 'YORB') {
-            this.show = new SpringShow2021(this.scene, this.camera, this.controls, this.mouse);
-            this.show.setup();
+            // this.show = new SpringShow2021(this.scene, this.camera, this.controls, this.mouse);
+            // this.show.setup();
+            //this.projectionScreens.createYorbProjectionScreens()
+	        this.projectionScreens = new ProjectionScreens(this.scene, this.camera, this.mouse);
+            this.itpModel = new ITPModel(this.scene);
+            this.photoGallery = new PhotoGallery(this.scene);
+            this.daysGallery = new DaysGallery(this.scene, this.camera, this.mouse);
+            this.budsGallery = new BudsGallery(this.scene, this.camera, this.mouse, this.controls, this.projectionScreens);
 
-            // this.projectionScreens.createYorbProjectionScreens()
-            // this.projectionScreens = new ProjectionScreens(this.scene, this.camera, this.mouse);
-            // this.itpModel = new ITPModel(this.scene);
-            // this.photoGallery = new PhotoGallery(this.scene);
-            // this.daysGallery = new DaysGallery(this.scene, this.camera, this.mouse);
+
             this.yorbie = new Yorbie(this.scene, new Vector3(2.86, 0, 1.19), 1);
         }
 
@@ -174,7 +179,7 @@ export class Yorb {
         //https://github.com/mrdoob/three.js/blob/master/examples/webgl_lights_hemisphere.html
         // main sunlight with shadows
         let dirLight = new THREE.DirectionalLight(0xffffe6, 0.7);
-        dirLight.color.setHSL(0.1, 1, 0.95);
+        dirLight.color.setHSL(0.0, 1, 0.95);
         dirLight.position.set(-1, 0.5, -1);
         dirLight.position.multiplyScalar(200);
         this.scene.add(dirLight);
@@ -540,11 +545,12 @@ export class Yorb {
 
         if (!this.controls.paused) {
             this.frameCount++;
-            this.show.update();
+            if (this.show) this.show.update();
 
             // things to update 50 times per seconds:
             this.controls.update();
             this.projectionScreens.update();
+            // this.budsGallery.updateDisplays();
             sceneDraw(this.scene);
 
             // things to update 5 x per second
