@@ -159,6 +159,7 @@ async function init() {
         sendCameraStreams();
         setupControls();
         turnGravityOn();
+        hitPlay();
         initialized = true;
         isInTutorial = false;
     }
@@ -310,6 +311,13 @@ function updateProjects(_projects) {
         yorbScene.updateProjects(projects);
         yorbScene.createHtmlProjectList(projects);
     }
+}
+
+function hitPlay() {
+  // check and see if we've visited #buds ...
+  // if(window.location.hash == '#buds') {
+    yorbScene.budsGallery.addDisplays()
+  // }
 }
 
 //==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//==//
